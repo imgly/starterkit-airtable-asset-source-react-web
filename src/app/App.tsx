@@ -8,28 +8,11 @@
 import { useCallback } from 'react';
 import CreativeEditor from '@cesdk/cesdk-js/react';
 import type CreativeEditorSDK from '@cesdk/cesdk-js';
+import type { Configuration } from '@cesdk/cesdk-js';
 import { initAirtableImageEditor, AirtableEditorOptions } from '../imgly';
 import { resolveAssetPath } from '../imgly/resolveAssetPath';
 import AirtableSidebar from './AirtableSidebar/AirtableSidebar';
 import styles from './App.module.css';
-
-// ============================================================================
-// CE.SDK Configuration
-// ============================================================================
-
-const config = {
-  userId: 'starterkit-airtable-asset-source-user',
-
-  // IMG.LY CDN (for quick testing only, NOT recommended for production)
-  // baseURL: `https://cdn.img.ly/packages/imgly/cesdk-js/${CreativeEditorSDK.version}/assets`,
-
-  // Local assets for development
-  ...(import.meta.env.CESDK_USE_LOCAL && {
-    baseURL: import.meta.env.VITE_CESDK_ASSETS_BASE_URL
-  })
-
-  // license: 'YOUR_LICENSE_KEY',
-};
 
 // ============================================================================
 // Airtable Editor Options
@@ -51,13 +34,17 @@ const editorOptions: AirtableEditorOptions = {
   apiKey: import.meta.env.VITE_AIRTABLE_API_KEY
 };
 
+interface AppProps {
+  config: Configuration;
+}
+
 /**
  * Main App Component
  *
  * Sets up the CE.SDK instance with Airtable integration and displays
  * the editor alongside an embedded Airtable sidebar.
  */
-export default function App() {
+export default function App({ config }: AppProps) {
   const handleInit = useCallback(async (cesdk: CreativeEditorSDK) => {
     (window as any).cesdk = cesdk;
     await initAirtableImageEditor(cesdk, editorOptions);
