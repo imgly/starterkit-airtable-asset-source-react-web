@@ -30,8 +30,8 @@ import styles from './App.module.css';
 //
 const editorOptions: AirtableEditorOptions = {
   // Use proxy URL if available, otherwise fall back to API key
-  proxyUrl: import.meta.env.VITE_AIRTABLE_PROXY_URL,
-  apiKey: import.meta.env.VITE_AIRTABLE_API_KEY
+  proxyUrl: (undefined as string | undefined),
+  apiKey: (undefined as string | undefined)
 };
 
 interface AppProps {
