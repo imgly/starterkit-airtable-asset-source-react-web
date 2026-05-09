@@ -9,7 +9,7 @@
  * @see https://airtable.com/developers/web/api
  */
 
-import CreativeEditorSDK from '@cesdk/cesdk-js';
+import type CreativeEditorSDK from '@cesdk/cesdk-js';
 
 import {
   BlurAssetSource,
